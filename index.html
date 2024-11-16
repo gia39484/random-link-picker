@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>亂數產生器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>亂數產生器</h1>
+    <p>按下按鈕後，系統會產生 1-3 的亂數並提供對應的網址。</p>
+    <button id="generateButton">產生亂數</button>
+    <p id="result"></p>
+    <script>
+        document.getElementById("generateButton").addEventListener("click", function () {
+            // 生成 1-3 的亂數
+            const randomNumber = Math.floor(Math.random() * 3) + 1;
+
+            // 對應的網址
+            const urls = {
+                1: "https://example.com/page1",
+                2: "https://example.com/page2",
+                3: "https://example.com/page3"
+            };
+
+            // 顯示結果
+            document.getElementById("result").innerHTML = `亂數結果：${randomNumber}<br>請點擊以下連結進入：<a href="${urls[randomNumber]}" target="_blank">${urls[randomNumber]}</a>`;
+        });
+    </script>
+</body>
+</html>
