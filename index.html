@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>專業版亂數產生器</title>
+    <title>高質感亂數產生器</title>
     <style>
         /* 全局樣式 */
         body {
@@ -15,36 +15,38 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: linear-gradient(to bottom right, #74b9ff, #0984e3);
-            color: #fff;
+            background-color: #1a1a1a; /* 深灰背景 */
+            color: #e0e0e0; /* 字體顏色 */
             text-align: center;
         }
-        
+
         /* 標題樣式 */
         h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
+            color: #f5f5f5; /* 純白字體 */
         }
-        
+
         p {
             font-size: 1.2rem;
             margin-bottom: 30px;
+            color: #bfbfbf; /* 淺灰色字體 */
         }
 
         /* 按鈕樣式 */
         button {
-            background-color: #2ecc71;
-            color: #fff;
-            border: none;
+            background-color: #333333; /* 深灰色 */
+            color: #f5f5f5; /* 白色文字 */
+            border: 2px solid #555555; /* 灰色邊框 */
             padding: 15px 30px;
             border-radius: 25px;
             font-size: 1.2rem;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
-        
+
         button:hover {
-            background-color: #27ae60;
+            background-color: #555555; /* 懸停效果，變淺灰色 */
             transform: scale(1.05);
         }
 
@@ -53,25 +55,27 @@
             font-size: 1.5rem;
             font-weight: bold;
             margin-top: 20px;
+            color: #d1d1d1; /* 顯示結果的灰色 */
         }
 
         a {
-            color: #fdcb6e;
+            color: #9e9e9e; /* 中灰色超鏈接 */
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
         a:hover {
-            color: #ffeaa7;
+            color: #f5f5f5; /* 懸停時超鏈接變純白 */
         }
 
         /* 卡片樣式 */
         .card {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: #2a2a2a; /* 深灰色卡片背景 */
+            border: 1px solid #3a3a3a; /* 更深灰色邊框 */
             border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* 陰影提升層次感 */
             max-width: 600px;
             width: 90%;
         }
@@ -79,7 +83,7 @@
 </head>
 <body>
     <div class="card">
-        <h1>專業版亂數產生器</h1>
+        <h1>高質感亂數產生器</h1>
         <p>點擊下方按鈕，生成 1-3 的亂數，並跳轉到對應的頁面。</p>
         <button id="generateButton">產生亂數</button>
         <div id="result"></div>
