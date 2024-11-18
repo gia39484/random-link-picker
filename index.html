@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高質感亂數產生器</title>
+    <title>問卷分派網站</title>
     <style>
+        /* 全局樣式 */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -31,25 +32,23 @@
             color: #bfbfbf; /* 淺灰色字體 */
         }
 
-        .question-section {
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 90%;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
             margin-bottom: 20px;
-        }
-
-        .options {
-            list-style: none;
-            padding: 0;
-        }
-
-        .options li {
-            margin: 10px 0;
-        }
-
-        label {
-            font-size: 1.2rem;
-        }
-
-        input[type="checkbox"] {
-            margin-right: 10px;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            font-size: 1rem;
         }
 
         button {
@@ -69,8 +68,7 @@
         }
 
         #result {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.2rem;
             margin-top: 20px;
             color: #d1d1d1;
         }
@@ -89,34 +87,29 @@
 </head>
 <body>
     <div class="card">
-        <h1>高質感亂數產生器</h1>
-        <p>親愛的研究參與者您好：</p>
+        <h1>問卷分派網站</h1>
         <p>
-            我是國立虎尾科技大學資訊管理所的研究生鄭尚喆，感謝您願意撥冗填答此問卷。
-            本研究旨在探討不同層級的 AI 在汽車智慧系統中的應用相關問題。
+            親愛的研究參與者您好：<br>
+            感謝您願意撥冗填答本研究問卷。為保障研究準確性，請先閱讀以下說明。
         </p>
-        <div class="question-section">
-            <p>請回答以下問題後生成亂數：</p>
-            <p><strong>1+1 等於？</strong></p>
-            <ul class="options">
-                <li><label><input type="checkbox" value="1">1</label></li>
-                <li><label><input type="checkbox" value="一">一</label></li>
-                <li><label><input type="checkbox" value="二">二</label></li>
-                <li><label><input type="checkbox" value="3">3</label></li>
-            </ul>
-        </div>
-        <button id="generateButton">驗證並產生亂數</button>
+        <p style="text-align: left;">
+            1. 由於問卷採隨機分派形式，每人僅可填寫一份問卷，請勿重複填寫。<br>
+            2. 為確保研究準確性，若驗證問題未通過，研究人員有權要求您重新測試或剝奪抽獎權。<br>
+            3. 請在下方文字框中輸入「我同意填寫網路問卷」進行驗證。
+        </p>
+        <input type="text" id="password" placeholder="請輸入密碼">
+        <button id="verifyButton">同意並進入問卷</button>
         <div id="result"></div>
     </div>
 
     <script>
-        document.getElementById("generateButton").addEventListener("click", function () {
-            // 獲取所有選中的選項
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            const selectedValues = Array.from(checkboxes).map(cb => cb.value);
+        document.getElementById("verifyButton").addEventListener("click", function () {
+            // 獲取輸入框的值
+            const passwordInput = document.getElementById("password").value.trim();
+            const correctPassword = "我同意填寫網路問卷";
 
-            // 檢查答案是否正確
-            if (selectedValues.includes("二") && selectedValues.length === 1) {
+            // 檢查密碼是否正確
+            if (passwordInput === correctPassword) {
                 // 生成 1-3 的亂數
                 const randomNumber = Math.floor(Math.random() * 3) + 1;
 
@@ -127,15 +120,12 @@
                     3: "https://example.com/page3"
                 };
 
-                // 顯示結果並提供跳轉鏈接
-                document.getElementById("result").innerHTML = `
-                    答對了！亂數結果：${randomNumber}<br>
-                    <a href="${urls[randomNumber]}" target="_blank">點此進入對應頁面</a>
-                `;
+                // 跳轉到對應網址
+                window.location.href = urls[randomNumber];
             } else {
-                // 答案不正確提示
+                // 顯示錯誤信息
                 document.getElementById("result").innerHTML = `
-                    <span style="color: red;">答案錯誤！請重新嘗試。</span>
+                    <span style="color: red;">密碼錯誤！請重新輸入。</span>
                 `;
             }
         });
