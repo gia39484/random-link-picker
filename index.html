@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>高質感亂數產生器</title>
     <style>
-        /* 全局樣式 */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -20,7 +19,6 @@
             text-align: center;
         }
 
-        /* 標題樣式 */
         h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
@@ -29,15 +27,35 @@
 
         p {
             font-size: 1.2rem;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: #bfbfbf; /* 淺灰色字體 */
         }
 
-        /* 按鈕樣式 */
+        .question-section {
+            margin-bottom: 20px;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 10px 0;
+        }
+
+        label {
+            font-size: 1.2rem;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
         button {
-            background-color: #333333; /* 深灰色 */
-            color: #f5f5f5; /* 白色文字 */
-            border: 2px solid #555555; /* 灰色邊框 */
+            background-color: #333333;
+            color: #f5f5f5;
+            border: 2px solid #555555;
             padding: 15px 30px;
             border-radius: 25px;
             font-size: 1.2rem;
@@ -46,65 +64,80 @@
         }
 
         button:hover {
-            background-color: #555555; /* 懸停效果，變淺灰色 */
+            background-color: #555555;
             transform: scale(1.05);
         }
 
-        /* 結果區域 */
         #result {
             font-size: 1.5rem;
             font-weight: bold;
             margin-top: 20px;
-            color: #d1d1d1; /* 顯示結果的灰色 */
+            color: #d1d1d1;
         }
 
         a {
-            color: #9e9e9e; /* 中灰色超鏈接 */
+            color: #9e9e9e;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
         a:hover {
-            color: #f5f5f5; /* 懸停時超鏈接變純白 */
-        }
-
-        /* 卡片樣式 */
-        .card {
-            background-color: #2a2a2a; /* 深灰色卡片背景 */
-            border: 1px solid #3a3a3a; /* 更深灰色邊框 */
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* 陰影提升層次感 */
-            max-width: 600px;
-            width: 90%;
+            color: #f5f5f5;
         }
     </style>
 </head>
 <body>
     <div class="card">
         <h1>高質感亂數產生器</h1>
-        <p>點擊下方按鈕，生成 1-3 的亂數，並跳轉到對應的頁面。</p>
-        <button id="generateButton">產生亂數</button>
+        <p>親愛的研究參與者您好：</p>
+        <p>
+            我是國立虎尾科技大學資訊管理所的研究生鄭尚喆，感謝您願意撥冗填答此問卷。
+            本研究旨在探討不同層級的 AI 在汽車智慧系統中的應用相關問題。
+        </p>
+        <div class="question-section">
+            <p>請回答以下問題後生成亂數：</p>
+            <p><strong>1+1 等於？</strong></p>
+            <ul class="options">
+                <li><label><input type="checkbox" value="1">1</label></li>
+                <li><label><input type="checkbox" value="一">一</label></li>
+                <li><label><input type="checkbox" value="二">二</label></li>
+                <li><label><input type="checkbox" value="3">3</label></li>
+            </ul>
+        </div>
+        <button id="generateButton">驗證並產生亂數</button>
         <div id="result"></div>
     </div>
+
     <script>
         document.getElementById("generateButton").addEventListener("click", function () {
-            // 生成 1-3 的亂數
-            const randomNumber = Math.floor(Math.random() * 3) + 1;
+            // 獲取所有選中的選項
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const selectedValues = Array.from(checkboxes).map(cb => cb.value);
 
-            // 對應的網址
-            const urls = {
-                1: "https://example.com/page1",
-                2: "https://example.com/page2",
-                3: "https://example.com/page3"
-            };
+            // 檢查答案是否正確
+            if (selectedValues.includes("二") && selectedValues.length === 1) {
+                // 生成 1-3 的亂數
+                const randomNumber = Math.floor(Math.random() * 3) + 1;
 
-            // 顯示結果並提供跳轉鏈接
-            document.getElementById("result").innerHTML = `
-                亂數結果：${randomNumber}<br>
-                <a href="${urls[randomNumber]}" target="_blank">點此進入對應頁面</a>
-            `;
+                // 對應的網址
+                const urls = {
+                    1: "https://example.com/page1",
+                    2: "https://example.com/page2",
+                    3: "https://example.com/page3"
+                };
+
+                // 顯示結果並提供跳轉鏈接
+                document.getElementById("result").innerHTML = `
+                    答對了！亂數結果：${randomNumber}<br>
+                    <a href="${urls[randomNumber]}" target="_blank">點此進入對應頁面</a>
+                `;
+            } else {
+                // 答案不正確提示
+                document.getElementById("result").innerHTML = `
+                    <span style="color: red;">答案錯誤！請重新嘗試。</span>
+                `;
+            }
         });
     </script>
 </body>
