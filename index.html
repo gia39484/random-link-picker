@@ -42,15 +42,6 @@
             width: 90%;
         }
 
-        input[type="text"] {
-            width: 80%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #555555;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
         button {
             background-color: #333333;
             color: #f5f5f5;
@@ -94,43 +85,29 @@
         </p>
         <p style="text-align: left;">
             1. 由於問卷採隨機分派形式，每人僅可填寫一份問卷，請勿重複填寫。<br>
-            2. 為確保研究準確性，若驗證問題未通過，研究人員有權要求您重新測試或剝奪抽獎權。<br>
-            3. 請在下方文字框中輸入「我同意填寫網路問卷」進行驗證。
+            2. 為確保研究準確性，若驗證問題未通過，研究人員有權要求您重新測試或剝奪抽獎權。
         </p>
-        <input type="text" id="password" placeholder="請輸入密碼">
         <button id="verifyButton">同意並進入問卷</button>
         <div id="result"></div>
     </div>
 
     <script>
         document.getElementById("verifyButton").addEventListener("click", function () {
-            // 獲取輸入框的值
-            const passwordInput = document.getElementById("password").value.trim();
-            const correctPassword = "我同意填寫網路問卷";
+            // 生成 1-6 的亂數
+            const randomNumber = Math.floor(Math.random() * 6) + 1;
 
-            // 檢查密碼是否正確
-            if (passwordInput === correctPassword) {
-                // 生成 1-6 的亂數
-                const randomNumber = Math.floor(Math.random() * 6) + 1;
+            // 對應的網址
+            const urls = {
+                1: "https://www.surveycake.com/s/ogye9",
+                2: "https://www.surveycake.com/s/1Z08B",
+                3: "https://www.surveycake.com/s/gAZzL",
+                4: "https://www.surveycake.com/s/G6vqz",
+                5: "https://www.surveycake.com/s/PgY0A",
+                6: "https://www.surveycake.com/s/oZexW"
+            };
 
-                // 對應的網址
-                const urls = {
-                    1: "https://www.surveycake.com/s/ogye9",
-                    2: "https://www.surveycake.com/s/1Z08B",
-                    3: "https://www.surveycake.com/s/gAZzL",
-                    4: "https://www.surveycake.com/s/G6vqz",
-                    5: "https://www.surveycake.com/s/PgY0A",
-                    6: "https://www.surveycake.com/s/oZexW"
-                };
-
-                // 跳轉到對應網址
-                window.location.href = urls[randomNumber];
-            } else {
-                // 顯示錯誤信息
-                document.getElementById("result").innerHTML = `
-                    <span style="color: red;">密碼錯誤！請重新輸入。</span>
-                `;
-            }
+            // 跳轉到對應網址
+            window.location.href = urls[randomNumber];
         });
     </script>
 </body>
