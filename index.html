@@ -84,8 +84,9 @@
             感謝您願意撥冗填答本研究問卷。為保障研究準確性，請先閱讀以下說明。
         </p>
         <p style="text-align: left;">
-            1. 由於問卷採隨機分派形式，每人僅可填寫一份問卷，請勿重複填寫。<br>
-            2. 為確保研究準確性，若驗證問題未通過，研究人員有權要求您重新測試或剝奪抽獎權。
+            1. 本問卷依隨機分派形式進行，您將被分配至一個特定情境，該情境為後續問卷填答的基礎，請依此回答問題。<br>
+            2. <strong style="color: #ffd700;">請務必以情境內容為依據，真實表達您的感受與看法，以協助研究探討情境對變數的影響差異。</strong><br>
+            3. 為確保研究準確性，若驗證問題未通過，研究人員有權要求您重新測試或剝奪抽獎資格。
         </p>
         <button id="verifyButton">同意並進入問卷</button>
         <div id="result"></div>
@@ -93,21 +94,33 @@
 
     <script>
         document.getElementById("verifyButton").addEventListener("click", function () {
-            // 生成 1-6 的亂數
-            const randomNumber = Math.floor(Math.random() * 6) + 1;
+            try {
+                // 生成 1-6 的亂數
+                const randomNumber = Math.floor(Math.random() * 6) + 1;
 
-            // 對應的網址
-            const urls = {
-                1: "https://www.surveycake.com/s/ogye9",
-                2: "https://www.surveycake.com/s/1Z08B",
-                3: "https://www.surveycake.com/s/gAZzL",
-                4: "https://www.surveycake.com/s/G6vqz",
-                5: "https://www.surveycake.com/s/PgY0A",
-                6: "https://www.surveycake.com/s/oZexW"
-            };
+                // 對應的網址
+                const urls = {
+                    1: "https://www.surveycake.com/s/ogye9",
+                    2: "https://www.surveycake.com/s/1Z08B",
+                    3: "https://www.surveycake.com/s/gAZzL",
+                    4: "https://www.surveycake.com/s/G6vqz",
+                    5: "https://www.surveycake.com/s/PgY0A",
+                    6: "https://www.surveycake.com/s/oZexW"
+                };
 
-            // 跳轉到對應網址
-            window.location.href = urls[randomNumber];
+                // 驗證是否有對應的 URL
+                if (urls[randomNumber]) {
+                    // 跳轉到對應網址
+                    window.location.href = urls[randomNumber];
+                } else {
+                    // 如果未找到對應網址
+                    document.getElementById("result").innerText = "發生錯誤，請稍後再試！";
+                }
+            } catch (error) {
+                // 錯誤處理
+                console.error("錯誤:", error);
+                document.getElementById("result").innerText = "發生意外錯誤，請稍後再試！";
+            }
         });
     </script>
 </body>
